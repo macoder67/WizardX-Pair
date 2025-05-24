@@ -1,0 +1,21 @@
+name": "wizard-xpair",
+    "description": "newly designed session by Macoder",
+    "logo": "https://files.catbox.moe/73mlk5.jpg",
+    "repository": "https://github.com/macoder67/wizard-xpair",
+    "keywords": ["wizard-xpair"],
+    "success_url": "/", 
+    "buildpacks": [{ "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" } ],
+    "env": {      
+      "PORT": {
+        "description": "Port for web app.4000,5000,3000... any!",
+        "value": "5000",
+        "required": false 
+      },
+      "MESSAGE": {
+        "description": "set session id confirmation message",
+        "value": "",
+        "required": true
+      }
+    }   
+
+}
