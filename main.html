@@ -1,0 +1,279 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Macoder sessions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Atomic Animation */
+    .atomic-animation {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      z-index: -1;
+    }
+
+    .nucleus {
+      width: 20px;
+      height: 20px;
+      background-color: #00FFFF;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: rotate 5s linear infinite;
+    }
+
+    .orbit::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: #00FFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    }
+
+    .orbit:nth-child(2) {
+      width: 150%;
+      height: 150%;
+      animation-duration: 7s;
+    }
+
+    .orbit:nth-child(3) {
+      width: 200%;
+      height: 200%;
+      animation-duration: 10s;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Existing Styles */
+    .btn {
+      --color: #e5f5f1;
+      --color2: rgb(0, 0, 0);
+      width: 200px;
+      padding: 0.8em 1.75em;
+      background-color: transparent;
+      border-radius: 6px;
+      border: .3px solid var(--color);
+      transition: .5s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      z-index: 1;
+      font-weight: 300;
+      font-size: 17px;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      text-transform: uppercase;
+      color: var(--color);
+      margin-bottom: 24px;
+    }
+
+    .btn::after, .btn::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      transform: skew(90deg) translate(-50%, -50%);
+      position: absolute;
+      inset: 50%;
+      left: 25%;
+      z-index: -1;
+      transition: .5s ease-out;
+      background-color: var(--color);
+    }
+
+    .btn::before {
+      top: -50%;
+      left: -25%;
+      transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+    }
+
+    .btn:hover::before {
+      transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+    }
+
+    .btn:hover::after {
+      transform: skew(45deg) translate(-50%, -50%);
+    }
+
+    .btn:hover {
+      color: var(--color2);
+    }
+
+    .btn:active {
+      filter: brightness(.7);
+      transform: scale(.98);
+    }
+
+    .story {
+      margin: 20px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .audio-controls {
+      margin-top: 20px;
+    }
+
+    .hacker-button {
+      background-color: #FFFF33;
+      color: #6633FF;
+      border: 2px solid #3300FF;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .hacker-button:hover {
+      background-color: #f00;
+      color: #FF33FF;
+    }
+
+    .contact-details {
+      margin-top: 20px;
+      color: #990099;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      color: #FFFF00;
+    }
+
+    .news-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-family: "Roboto", sans-serif;
+      box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.3);
+    }
+
+    .news-container .title {
+      position: absolute;
+      background: #df2020;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      color: white;
+      font-weight: bold;
+      z-index: 200;
+    }
+
+    .news-container ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      animation: scroll 25s infinite linear;
+    }
+
+    .news-container ul li {
+      white-space: nowrap;
+      padding: 10px 24px;
+      color: #494949;
+      position: relative;
+    }
+
+    .news-container ul li::after {
+      content:"";
+      width: 1px;
+      height: 100%;
+      background: #b8b8b8;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .news-container ul li:last-child::after {
+      display: none;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-1083px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Atomic Animation -->
+  <div class="atomic-animation">
+    <div class="nucleus"></div>
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+  </div>
+
+  <div class="news-container">
+    <div class="title">
+      Hello there WizardX-MD User
+    </div>
+    <ul>
+      <li>welcome to King Automation The Upcoming Minister of Technology</li>
+      <li>Here you will get session ids for your whatsapp bots</li>
+      <li>WizardX-MD and others</li>
+    </ul>
+  </div>
+
+  <center>  
+    <button onclick="window.open(`/qr`)" class="btn">qr code</button>
+    <button onclick="window.open(`/pair`)" class="btn">pair code</button>
+    <button onclick="window.open(`https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FXdKing2%2FMALVIN-XD&team=juni3&template=https%3A%2F%2Fgithub.com%2FXdKing2%2FMALVIN-XD.git`)" class="btn">deploy to heroku</button>
+    <button onclick="window.open(`https://whatsapp.com/channel/0029VbA6MSYJUM2TVOzCSb2A`)" class="btn">Join WhatsAppChannel</button>
+    <button onclick="window.open(`https://github.com/XdKing2/MALVIN-XD`)" class="btn">Open  Repo</button>
+  </center>
+
+  <div class="copyright">
+    <center>
+      <p>&copy; WizardX-MD 2025</p>
+      <p>𝐃𝐞𝐬𝐢𝐠𝐧𝐞𝐝 𝐁𝐲 <b>Macoder</b> 𝐅𝐨𝐫  𝐘𝐨𝐮 👌</p>
+    </center>
+  </div>
+</body>
+</html>
